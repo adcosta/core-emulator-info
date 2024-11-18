@@ -17,34 +17,13 @@ ifconfig -a
 ```zsh
 ens160: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.130.129  netmask 255.255.255.0  broadcast 192.168.130.255
-        inet6 fe80::f279:6ffa:13fb:4ae5  prefixlen 64  scopeid 0x20<link>
-        ether 00:0c:29:c8:c5:29  txqueuelen 1000  (Ethernet)
-        RX packets 7704  bytes 10875485 (10.8 MB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 1362  bytes 120545 (120.5 KB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-        device interrupt 45  memory 0x3fe00000-3fe20000  
-
+...
 ens256: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.143.128  netmask 255.255.255.0  broadcast 192.168.143.255
-        inet6 fe80::f3de:c640:891a:7257  prefixlen 64  scopeid 0x20<link>
-        ether 00:0c:29:c8:c5:33  txqueuelen 1000  (Ethernet)
-        RX packets 4  bytes 558 (558.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 50  bytes 6188 (6.1 KB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-        device interrupt 47  memory 0x3e600000-3e620000  
-
+...
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
-        inet6 ::1  prefixlen 128  scopeid 0x10<host>
-        loop  txqueuelen 1000  (Local Loopback)
-        RX packets 195  bytes 24295 (24.2 KB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 195  bytes 24295 (24.2 KB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-
+...
 ```
 
 Depois da criação temos o par "veth" ainda por configurar:
@@ -169,5 +148,11 @@ Explicação:
 - Aparenetemente devíamos poder associar o interface RJ45 da topologia CORE a um interface da VM já existente. Mas ao fazermos isso, o interface associado deixa de funcionar. Não sei porquê (ainda). Uma teoria é que o NetworkManager do Ubuntu reconfigura os interfaces, mas mesmo desligando o NetworkManager a coisa não funciona na mesma. Provavelmente os interfaces da VM já estão em bridges no seio do virtualizador usado. Mas sempre foi assim e antigamente funcionava bem.
 
 - O que o CORE GUI faz é criar uma bridge linux e associar o interface externo a essa bridge. Logo podemos fazer isso com qualquer interface, incluindo um nosso criado para o efeito que não esteja sob alçada de mais ninguém. Apenas dificulta um pouco a conectividade para fora da VM (global)
+
+## Referências 
+
+- [CORE Documentation - Tutorial 5 -  RJ45 Node](https://coreemu.github.io/core/tutorials/tutorial5.html#running-with-the-grpc-script)
+- [CORE Documentation](https://coreemu.github.io/core/index.html)
+
 
 
